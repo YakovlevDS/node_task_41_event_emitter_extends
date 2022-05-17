@@ -1,12 +1,43 @@
-let nodePath = process.argv[0];
-let appPath = process.argv[1];
-let name = process.argv[2];
-let age = process.argv[3];
+// const Emitter = require("events");
 
-console.log("nodePath: " + nodePath);
-console.log("appPath: " + appPath);
-console.log();
-console.log("name: " + name);
-console.log("age: " + age);
+// let emitter = new Emitter();
+// let eventName = "greet";
 
-// node app.js Tom 23
+// emitter.on(eventName, () =>{
+//     console.log("Hello all!");
+// });
+
+// emitter.on(eventName,  ()=> {
+//     console.log("Привет!");
+// });
+
+// emitter.emit(eventName);
+
+
+// const Emitter = require("events");
+// let emitter = new Emitter();
+// let eventName = "greet";
+// emitter.on(eventName, (data)=>{
+//     console.log(data);
+// });
+ 
+// emitter.emit(eventName, "Hi!");
+
+
+const EventEmitter = require("events");
+  
+let eventName = "greet";
+ 
+class User extends EventEmitter {
+    sayHi(data) {
+        this.emit(eventName, data);
+    }
+}
+ 
+let user = new User();
+// добавляем к объекту user обработку события "greet"
+user.on(eventName, function(data){
+    console.log(data);
+});
+  
+user.sayHi("Мне нужна твоя одежда...");
